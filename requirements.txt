@@ -1,0 +1,6 @@
+python-dotenv
+click
+sphinx
+typer
+tqdm
+loguru
