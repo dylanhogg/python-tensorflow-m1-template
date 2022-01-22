@@ -1,7 +1,7 @@
 # Python TensorFlow on Apple M1 project template
 
-[![Latest Tag](https://img.shields.io/github/v/tag/dylanhogg/python-project-template)](https://github.com/dylanhogg/python-project-template/tags)
-[![Build](https://github.com/dylanhogg/python-project-template/workflows/build/badge.svg)](https://github.com/dylanhogg/python-project-template/actions)
+[![Latest Tag](https://img.shields.io/github/v/tag/dylanhogg/python-tensorflow-m1-template)](https://github.com/dylanhogg/python-tensorflow-m1-template/tags)
+[![Build](https://github.com/dylanhogg/python-tensorflow-m1-template/workflows/build/badge.svg)](https://github.com/dylanhogg/python-tensorflow-m1-template/actions)
 
 A quick-start TensorFlow on Apple M1 GPU project template featuring:
 
