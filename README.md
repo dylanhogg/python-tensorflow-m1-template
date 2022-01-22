@@ -1,22 +1,28 @@
-# Python project template
+# Python TensorFlow on Apple M1 project template
 
 [![Latest Tag](https://img.shields.io/github/v/tag/dylanhogg/python-project-template)](https://github.com/dylanhogg/python-project-template/tags)
 [![Build](https://github.com/dylanhogg/python-project-template/workflows/build/badge.svg)](https://github.com/dylanhogg/python-project-template/actions)
 
-A quick-start Python project template featuring:
+A quick-start TensorFlow on Apple M1 GPU project template featuring:
 
-1) Useful functionality wrapped in a `Makefile`
-2) Helpful default packages (details below)
-3) Nicely configured JupyterLab for experiments with example notebook loading external scripts
-4) Separated app and dev `requirements.txt` files 
-5) A Python `.gitignore`
-6) A GitHub build action
-7) Example app showing logging and CLI arg parsing
+1) Creates Conda environment with TensorFlow optimised for Apple M1 GPU (encapsulated in `create-conda-tensorflow-env.sh`)
+2) Useful functionality wrapped in a `Makefile`
+3) Helpful default packages (details below)
+4) Nicely configured JupyterLab for experiments with example notebook loading external scripts
+6) A Python `.gitignore`
+7) A GitHub build action
+8) Example app showing logging and CLI arg parsing
+
+Based on the more generic Python template: https://github.com/dylanhogg/python-project-template
 
 
 ## Makefile support for common tasks
 
-1) `make venv` - create an isolated virtual environment (using [venv](https://docs.python.org/3/library/venv.html)) and install common packages
+1) `make create-conda-env` - create an isolated Conda environment and install TensorFlow on M1 packages:
+   1) tensorflow-deps
+   2) tensorflow-macos
+   3) tensorflow-metal
+   4) tensorflow-datasets
 2) `make run` - run the main app in venv with appropriate paths set
 3) `make jupyter` - launch [jubyter lab](https://jupyterlab.readthedocs.io/) with `/notebooks` root folder but still retaining notebook access to the parent `/src` and `/log` folders 
 4) `make test` - run unit tests

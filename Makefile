@@ -3,41 +3,53 @@ PROJECT=todo
 BUCKET=todo
 PROFILE=default
 DATA_FOLDER=data
+CONDA_ACTIVATE=source $$(conda info --base)/etc/profile.d/conda.sh
 
-## Create virtual environment
-venv:
-	python3 -m venv venv
-	source venv/bin/activate ; pip install --upgrade pip ; python3 -m pip install -r requirements-dev.txt
-	source venv/bin/activate ; pip freeze > requirements_freeze.txt
+## Create conda TensorFlow environment
+create-conda-env:
+	./create-conda-tensorflow-env.sh
+	$(CONDA_ACTIVATE); conda activate ./env; conda list --export > requirements_conda_export.txt
 
-## Clean virtual environment
-clean:
-	rm -rf venv
+## Clean conda environment
+clean-conda-env:
+	rm -rf env
 
-## Run the app
-run:
-	source venv/bin/activate ; PYTHONPATH='./src' python -m app req1 --optional-arg opt1
+## Info on conda activate
+conda-activate:
+	@echo "I don't run well from a Makefile, just do: 'conda activate ./env' then 'conda deactivate' later"
 
-## App help message
-run_help:
-	source venv/bin/activate ; PYTHONPATH='./src' python -m app --help
+## Conda list
+conda-list:
+	$(CONDA_ACTIVATE); conda activate ./env; conda list
+
+## Python env info
+python-info:
+	$(CONDA_ACTIVATE); conda activate ./env; python --version; which -a python
 
 ## Run jupyter lab
 jupyter:
-	source venv/bin/activate; PYTHONPATH='./src' jupyter lab
+	$(CONDA_ACTIVATE); conda activate ./env; PYTHONPATH='./src' jupyter lab
+
+## Run the app
+run:
+	$(CONDA_ACTIVATE); conda activate ./env; PYTHONPATH='./src' python -m app req1 --optional-arg opt1
+
+## App help message
+run_help:
+	$(CONDA_ACTIVATE); conda activate ./env; PYTHONPATH='./src' python -m app --help
 
 ## Run unit tests
 test:
-	source venv/bin/activate ; PYTHONPATH='./src' pytest -vvv -s
+	$(CONDA_ACTIVATE); conda activate ./env; PYTHONPATH='./src' pytest -vvv -s --ignore=env
 
 ## Run black code formatter
 black:
-	source venv/bin/activate ; black  --line-length 120 .
+	$(CONDA_ACTIVATE); conda activate ./env; black  --line-length 120 .
 
 ## Run flake8 linter
 flake8:
-	source venv/bin/activate ; flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-	source venv/bin/activate ; flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+	$(CONDA_ACTIVATE); conda activate ./env; flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+	$(CONDA_ACTIVATE); conda activate ./env; flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
 ## Upload Data to S3
 sync_data_to_s3:
