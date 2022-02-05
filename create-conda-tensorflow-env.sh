@@ -10,6 +10,14 @@ set -e
 # https://developer.apple.com/metal/tensorflow-plugin/
 # https://github.com/mrdbourke/m1-machine-learning-test
 
+echo "***** CHECK: valid Apple Silicon (arm64) architecture"
+if [[ $(uname -m) != "arm64" ]] ; then
+  echo "ERROR: TensorFlow with ML Compute acceleration is only available on Apple Silicon (arm64). Your machine is $(uname -m)"
+  exit 1
+else
+  echo "Architecture $(uname -m) OK"
+fi
+
 echo "***** CHECK: valid macOS version"
 if [[ $(uname) != Darwin ]] || [[ $(sw_vers -productName) != macOS ]] || [[ $(sw_vers -productVersion | cut -c1-2) -lt 11 ]] ; then
   echo "ERROR: TensorFlow with ML Compute acceleration is only available on macOS 11 and later. You are running $(sw_vers -productVersion)"
