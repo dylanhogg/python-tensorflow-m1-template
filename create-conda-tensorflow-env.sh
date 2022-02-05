@@ -10,6 +10,14 @@ set -e
 # https://developer.apple.com/metal/tensorflow-plugin/
 # https://github.com/mrdbourke/m1-machine-learning-test
 
+echo "***** CHECK: valid macOS version"
+if [[ $(uname) != Darwin ]] || [[ $(sw_vers -productName) != macOS ]] || [[ $(sw_vers -productVersion | cut -c1-2) -lt 11 ]] ; then
+  echo "ERROR: TensorFlow with ML Compute acceleration is only available on macOS 11 and later. You are running $(sw_vers -productVersion)"
+  exit 1
+else
+  echo "macOS $(sw_vers -productVersion) version OK"
+fi
+
 echo "***** CREATE: conda evironment"
 conda create -y --prefix ./env
 eval "$(conda shell.bash hook)"
