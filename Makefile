@@ -59,6 +59,17 @@ sync_data_to_s3:
 sync_data_from_s3:
 	aws s3 sync s3://$(BUCKET)/$(PROJECT)/ $(DATA_FOLDER)/ --profile $(PROFILE) --exclude ".*"
 
+## Create asitop venv
+venv_asitop:
+	python3 -m venv venv_asitop
+	source venv_asitop/bin/activate ; pip install --upgrade pip ; python3 -m pip install asitop
+	source venv_asitop/bin/activate ; pip freeze > requirements_freeze.txt
+
+## Run asitop (Performance monitoring CLI tool for Apple Silicon)
+asitop:
+	source venv_asitop/bin/activate ; sudo asitop
+
+
 
 #################################################################################
 # Self Documenting Commands                                                     #
