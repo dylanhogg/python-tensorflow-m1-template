@@ -32,16 +32,20 @@ eval "$(conda shell.bash hook)"
 conda activate ./env
 
 echo "***** INSTALLING: tensorflow-deps (incl python and pip)..."
-# tensorflow-deps versions are following base TensorFlow versions, see: https://www.tensorflow.org/versions
+# tensorflow-deps versions: https://anaconda.org/apple/tensorflow-deps/files
+# following base TensorFlow versions, see: https://www.tensorflow.org/versions
 conda install -y -c apple tensorflow-deps==2.7.0
 
 echo "***** INSTALLING: tensorflow-macos..."
-python -m pip install tensorflow-macos
+# tensorflow-macos versions: https://pypi.org/project/tensorflow-macos/#history
+python -m pip install tensorflow-macos==2.7.0
 
 echo "***** INSTALLING: tensorflow-metal..."
-python -m pip install tensorflow-metal
+# tensorflow-macos versions: https://pypi.org/project/tensorflow-metal/#history
+python -m pip install tensorflow-metal==0.3.0
 
 echo "***** INSTALLING: tensorflow-datasets..."
+# tensorflow-datasets versions: https://pypi.org/project/tensorflow-datasets/#history
 python -m pip install tensorflow-datasets
 
 conda list --export > conda_export_tensorflow_only.txt
